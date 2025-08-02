@@ -1,35 +1,27 @@
 import  express from 'express';
-import { MongoClient } from 'mongodb';
+import dbConnection from './dbConnection.js';
+
 const app = express()
 const port = 3000;
-const DB_URI = 'mongodb://127.0.0.1:27017';
-const DB_NAME = 'todoAppDB';
-let db;
+
 
 
 app.use(express.json())
+
+//handling cors
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*'); // Or specify your frontend URL
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    
     // Handle preflight requests
     if (req.method === 'OPTIONS') {
         return res.sendStatus(204);
     }
-    
     next();
 });
 
-// mongodb connetion===========
-
-MongoClient.connect(DB_URI)
-.then(client=>{
-    console.log('✅ Connected to MongoDB');
-    db=client.db(DB_NAME);
-    // console.log(db)
-}).catch(error=>console.error('❌ MongoDB connection failed',error))
-//================mongodb=========
+//calling dbConnection
+dbConnection()
 
 app.get('/', (req, res) => res.send('Hello World!'))
 
