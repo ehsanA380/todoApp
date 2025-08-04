@@ -17,6 +17,10 @@ export default defineConfig({
     tailwindcss(),
     react()
   ],
+  optimizeDeps: {
+    exclude: ["your-problem-package"]
+  }
+
 })
 
 

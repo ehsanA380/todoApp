@@ -41,6 +41,7 @@ function signup() {
                 sessionStorage.setItem('login', 'true')
                 sessionStorage.setItem('fname', formData.fname)
                 sessionStorage.setItem('lname', formData.lname)
+                sessionStorage.setItem('token','bearer '+data.token)
             }
         }
     };

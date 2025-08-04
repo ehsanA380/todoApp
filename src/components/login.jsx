@@ -41,6 +41,7 @@ function Login() {
                 sessionStorage.setItem('login', data.login)
                 sessionStorage.setItem('fname', data.fname)
                 sessionStorage.setItem('lname', data.lname)
+                sessionStorage.setItem('token','bearer '+ data.token)
             }
         }
     };

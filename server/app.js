@@ -1,5 +1,6 @@
 import express from 'express';
 import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken';
 import { dbConnection, db } from './dbConnection.js';
 // import { MongoClient } from 'mongodb';
 
@@ -25,6 +26,16 @@ app.use((req, res, next) => {
 dbConnection()
 
 app.get('/', (req, res) => res.send('Hello World!'))
+
+// funtion to creating jwt
+const createToken = (userId)=>{
+  try{
+    return jwt.sign({ id:userId}, process.env.JWT_SECRET,{ expiresIn: "1h" });
+  }catch(err){
+    console.log('token err',err)
+  }
+}
+//=========================
 
 // app.post('/signup',(req,res)=>{
 //     console.log(req.body)
@@ -58,7 +69,9 @@ app.post('/signup', async (req, res) => {
         newUser.password = hasedPassword;
         if (hasedPassword) {
           const result = await db.collection('users').insertOne(newUser);
-          res.status(201).json({ message: 'your data has been saved successfully!', insertedId: result.insertedId });
+          const token = createToken(result.insertedId)
+          console.log(token)
+          res.status(201).json({ message: 'your data has been saved successfully!', insertedId: result.insertedId,token });
           console.log(result);
         }
       })
@@ -76,7 +89,7 @@ app.post('/login',async(req,res)=>{
   const {email,password}=req.body;
   try{
     const checkUsernameExist = await db.collection('users').findOne({email});
-    const {fname,lname} = checkUsernameExist;
+    const {fname,lname,_id} = checkUsernameExist;
     console.log(checkUsernameExist);
     
     const hasedPassword = checkUsernameExist.password;
@@ -84,7 +97,9 @@ app.post('/login',async(req,res)=>{
       const isMatchPassword = await bcrypt.compare(password,hasedPassword);
       console.log(isMatchPassword)
       if(isMatchPassword){
-        res.status(201).json({message:'logged in successfully',fname,lname,email,login:true})
+        const token = createToken(_id)
+        console.log(token)
+        res.status(201).json({message:'logged in successfully',fname,lname,email,login:true,token})
       }else{
         res.status(401).json({message:'username or password is incorrect'})
       }
