@@ -1,13 +1,14 @@
-import React from 'react'
-import { useAuth } from '../context/authContext'
+import React, { useContext } from 'react'
+import AuthContext from '../context/authContext'
 
 function Home() {
-  const {user,logout} = useAuth();
+  const {auth,logout} = useContext(AuthContext)
+  // console.log(auth,logout)
   return (
     <>
-    <h1>Welcome {user?.name}</h1>
-      <button onClick={logout} className='button'>Logout</button>
-
+      {auth.token?<h1>logged in </h1>: <h1>logout</h1>}
+      <h1>{auth.user}</h1>
+      
     </>
   )
 }

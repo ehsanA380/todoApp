@@ -2,6 +2,7 @@ import express from 'express';
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken';
 import { dbConnection, db } from './dbConnection.js';
+import { ObjectId } from 'mongodb';
 // import { MongoClient } from 'mongodb';
 
 
@@ -111,6 +112,28 @@ app.post('/login',async(req,res)=>{
   }
 
 })
+
+//token verify
+
+app.post('/verifyjwt', async(req,res)=>{
+  const token = req.headers.authorization?.split(' ')[1];
+
+  if(!token) return res.status(401).json({message:'Access Denied',status:false});
+  try{
+    const verified = jwt.verify(token,process.env.JWT_SECRET);
+    req.user = verified;
+    console.log(req.user);
+    if(verified){
+      const id = verified.id;
+      const data =  await db.collection('users').findOne({_id:new ObjectId(`${id}`)}); 
+      // console.log(data)
+      res.status(201).json({message :'token verified successfully',status:true,data})
+    }
+  }catch(err){
+    res.status(403).json({message:'invalid token',status:false})
+  }
+})
+
 
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
