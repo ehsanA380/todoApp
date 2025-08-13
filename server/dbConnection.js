@@ -1,7 +1,9 @@
-import { loadEnvFile } from 'node:process';
+// import { loadEnvFile } from 'node:process';
+import dotenv from 'dotenv';
 import { MongoClient } from 'mongodb';
 
-loadEnvFile();
+dotenv.config();
+// loadEnvFile();
 const DB_URI = process.env.MONGO_URI ;
 // const DB_URI = 'mongodb://localhost:27017';
 const DB_NAME = 'todoAppDB';

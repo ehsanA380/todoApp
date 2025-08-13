@@ -7,7 +7,7 @@ import { ObjectId } from 'mongodb';
 
 
 const app = express()
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(express.json())
 
@@ -136,4 +136,4 @@ app.post('/verifyjwt', async(req,res)=>{
 
 
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.listen(port,'0.0.0.0', () => console.log(`Example app listening on port ${port}!`))
