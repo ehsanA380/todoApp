@@ -29,6 +29,8 @@ export default defineConfig({
     },
     host:'0.0.0.0',
     port:process.env.PORT ? parseInt(process.env.PORT) : 5173,
+    allowedHosts: ['todoapp-8gb2.onrender.com'],
+
     // ✅ No need for historyApiFallback here
   },
 });
