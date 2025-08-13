@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import TaskModal from './modal/taskModal';
 
 function Task() {
     const [formData, setFromData] = useState({ title: '', description: '' });
@@ -16,7 +17,7 @@ function Task() {
                     // console.log('hi');
                     btns.forEach((e) => {
                         e.classList.remove('bg-green-800', 'text-white', 'hover:bg-green-700')
-                        e.classList.add('hover:bg-green-100', 'bg-[rgb(199,211,194)]', 'text-black-800')
+                        e.classList.add('hover:bg-green-100', 'bg-[rgb(199,211,194)]', 'text-black')
                     }
                     );
                     btn.classList.add('bg-green-800', 'hover:bg-green-700', 'text-white')
@@ -38,52 +39,36 @@ function Task() {
 
 
     return (
-        <div className='bg-red-200 h-auto   '>
+        <>
+        <div className='bg-[#F1F1F2] absolute bottom-0 top-16 right-0 left-0  '>
             <div className='heading w-full'>
                 <div id='navRow' className={`w-fit  pt-[8px] mx-auto   `}>
                     <button className={'btnCustom transition duration-200  border-r-2 rounded-l-xl border-amber-50 px-12 py-2 cursor-pointer bg-green-800  text-white hover:bg-green-700 '}>Today</button>
                     <button className={'btnCustom transition duration-200 border-r-2 border-amber-50 px-12 py-2 cursor-pointer bg-[rgb(199,211,194)] hover:bg-green-100'}>Pending</button>
-                    <button className={'btnCustom transition duration-200 rounded-r-xl px-12 py-2 cursor-pointer bg-[rgb(199,211,194)] hover:bg-green-100'}>OverDueS</button>
+                    <button className={'btnCustom transition duration-200 rounded-r-xl px-12 py-2 cursor-pointer bg-[rgb(199,211,194)] hover:bg-green-100'}>Overdue</button>
                 </div>
             </div>
-            <div id='taskContainer' className='font-semibold mt-30 text-2xl w-full flex justify-between'>
-                <div className="ml-20">
+            <div id='taskContainer' className='mt-20 text-2xl w-full flex justify-between items-center'>
+                <div className="ml-20 font-semibold ">
                     <h1 >Task</h1>
                 </div>
                 <div className="task mr-20">
-                    <h1>Add Task</h1>
+                    <TaskModal/>
+                    <button  className='bg-green-700 text-white text-[16px]  py-1 px-5 rounded-[3px] hover:bg-green-600 cursor-pointer' onClick={()=>document.getElementById('taskModal').show()} >+ Add Task </button>
                 </div>
             </div>
             <div id="taskHolderContainer">
-                {/* work here */}
+                <div id="mainTaskWrapper" className='border-2 border-[#9d9d9dc0] w-[80%] mx-auto min-h-80 rounded-[8px] mt-2 bg-[#fff] shadow-[10px]'>
+                    <div id="taskList" className='border-2 border-[#9d9d9dc0]  mx-auto min-h-60 rounded-[1px] mt-6 w-[95%] bg-[#fff] shadow-[10px] py-10'>
+                        
+                    </div>
+                   
+                </div>
             </div>
 
-            <h1 className='text-2xl font-semibold mt-5 my-auto text-center underline underline-offset-5 '>Add Task</h1>
-            <div id='formContainer flex item-center '>
-                <form onSubmit={handleSubmit} method="dialog" class=" bg-white p-6 h-auto w-96 rounded-xl shadow-lg  ">
-                    <h2 class="text-xl font-semibold mb-4">Log In</h2>
-
-
-                    {/* <!-- Email --> */}
-                    <div class="mb-4">
-                        <label htmlFor="email" class="block text-sm font-medium text-gray-700">Title</label>
-                        <input type="email" name='email' id="email" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" value={formData.title} onChange={handleChange} required />
-                    </div>
-
-                    {/* <!-- Password --> */}
-                    <div class="mb-6">
-                        <label for="password" class="block text-sm font-medium text-gray-700">Description</label>
-                        <input type="password" name='password' id="password" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" value={formData.description} onChange={handleChange} required />
-                    </div>
-
-                    {/* <!-- Buttons --> */}
-                    <div class="flex justify-end space-x-2">
-                        <Link to='/' id='cancel' type="button" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Cancel</Link>
-                        {spinner ? 'loading...' : <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">Add</button>}
-                    </div>
-                </form>
-            </div>
+           
         </div>
+        </>
     )
 }
 export default Task

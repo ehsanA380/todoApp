@@ -8,6 +8,7 @@ import Project from "./components/project";
 import AuthContext from "./context/authContext";
 import { useContext, useEffect } from "react";
 import ProtectedRoute from "./context/ProtectedRoutes";
+import TaskModal from "./components/modal/taskModal";
 
 
 
@@ -28,6 +29,7 @@ function App() {
        <Route path="/login" element={<Login/>} />
        <Route path="/task" element={<ProtectedRoute><Task/></ProtectedRoute> } />
        <Route path="/project" element={<Project/>} />
+       <Route path="/task/addtask" element={<TaskModal/>} />
        <Route path="*" element={<h1>404 Not Found</h1>} />
      </Routes>
    </>

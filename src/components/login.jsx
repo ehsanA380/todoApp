@@ -66,9 +66,11 @@ function Login() {
 
 
             {/* <!-- Modal --> */}
-            <dialog id="signinModal" className=" absolute mt-[25%]  left-[50%] translate-[-192px] rounded-xl p-0 backdrop:bg-black/50 ">
-                <form onSubmit={handleSubmit} method="dialog" class=" bg-white p-6 h-auto w-96 rounded-xl shadow-lg  ">
-                    <h2 class="text-xl font-semibold mb-4">Log In</h2>
+            <dialog id="signinModal" className="modal  ">
+            <div className='modal-box'>
+                <form onSubmit={handleSubmit} method="dialog" >
+                    <Link to='/' type='button'onClick={() => document.getElementById('signinModal').close()} className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</Link>
+                    <h2 class="text-xl  font-semibold mb-4">Log In</h2>
 
                     
                     {/* <!-- Email --> */}
@@ -85,10 +87,12 @@ function Login() {
 
                     {/* <!-- Buttons --> */}
                     <div class="flex justify-end space-x-2">
-                        <Link to='/' id='cancel' onClick={() => document.getElementById('signinModal').close()} type="button" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Cancel</Link>
+                        <Link to='/' id='cancel' onClick={() => document.getElementById('signinModal').close()} type="button" class="px-4 py-2 bg-gray-900 rounded hover:bg-gray-400">Cancel</Link>
                         {spinner ? 'loading...' : <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">login</button>}
                     </div>
                 </form>
+            </div>
+                
             </dialog>
             <ToastContainer />
 

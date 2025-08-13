@@ -27,6 +27,7 @@ export default defineConfig({
     fs: {
       allow: ['.'],
     },
+    port:4000,
     // ✅ No need for historyApiFallback here
   },
 });
