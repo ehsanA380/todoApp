@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useLocation, Link, useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
+import AuthContext from '../context/authContext';
 function Login() {
+    const {setLogin} = useContext(AuthContext);
     const location = useLocation();
     const navigateTo = useNavigate();
+    const [loggedIn,setLoggedIn] = useState(false);
     const [spinner, setSpinner] = useState(false);
     const [formData, setFromData] = useState({ email: '', password: '' });
     const handleChange = (e) => {
@@ -37,11 +40,13 @@ function Login() {
             }, 1000);
             navigateTo('/')
             if (data.login) {
+                setLogin(true);
                 sessionStorage.setItem('user', data.email)
                 sessionStorage.setItem('login', data.login)
                 sessionStorage.setItem('fname', data.fname)
                 sessionStorage.setItem('lname', data.lname)
                 sessionStorage.setItem('token','bearer '+ data.token)
+                localStorage.setItem('login',true);
             }
         }
     };

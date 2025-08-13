@@ -3,6 +3,8 @@ import AuthContext from "./authContext";
 
 const AuthProvider =({children})=>{
     const [auth,setAuth] = useState({token:null,user:null,data:{}});
+    const [login,setLogin]= useState(false);
+    const [loading,setLoading] =useState(true);
     
     useEffect(()=>{
         const token = sessionStorage.getItem('token');
@@ -17,29 +19,37 @@ const AuthProvider =({children})=>{
             });
             const data = await res.json();
             console.log(data);
-            if(data){
+            if(data.status){
+                setLogin(true);
+                setLoading(false);
                 const user = data.data.fname;
                 setAuth({token,user,data});   
             }
         }
-        
         if(token){
             verifyToken(token)
+        }else{
+            setLoading(false);
         }
+        
            
-    },[0]);
+    },[login]);
 
-    const login = (token,user) =>{
-        sessionStorage.setItem('token',token);
-        setAuth({token,user})
-    }
+    // const login = (token,user) =>{
+    //     sessionStorage.setItem('token',token);
+    //     sessionStorage.setItem('userData',auth.data)
+    //     setAuth({token,user})
+    // }
     const logout = () =>{
-        sessionStorage.removeItem('token');
+        // sessionStorage.removeItem('token');
+        setLogin(false)
+        sessionStorage.clear();
+        localStorage.setItem('login',false)
         setAuth({token:null,user:null});
     };
 
     return(
-        <AuthContext.Provider value={{auth,login,logout}}>
+        <AuthContext.Provider value={{auth,logout,setLogin,login,loading}}>
             {children}
         </AuthContext.Provider>
     );

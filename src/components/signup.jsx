@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useLocation, Link, useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
+import AuthContext from '../context/authContext';
 function signup() {
     const location = useLocation();
+    const {setLogin} = useContext(AuthContext);
     const navigateTo = useNavigate();
     const [spinner, setSpinner] = useState(false);
     const [formData, setFromData] = useState({ fname: '', lname: '', email: '', password: '' });
@@ -37,6 +39,7 @@ function signup() {
             }, 1000);
             navigateTo('/')
             if (data.insertedId) {
+                setLogin(true);
                 sessionStorage.setItem('user', formData.email)
                 sessionStorage.setItem('login', 'true')
                 sessionStorage.setItem('fname', formData.fname)

@@ -8,19 +8,28 @@
 // })
 
 
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite';
+import { resolve } from 'path';
 
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   plugins: [
-    tailwindcss(),
-    react()
+    react(),
+    tailwindcss()
   ],
-  optimizeDeps: {
-    exclude: ["your-problem-package"]
-  }
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, './src'),
+    },
+  },
+  server: {
+    fs: {
+      allow: ['.'],
+    },
+    // ✅ No need for historyApiFallback here
+  },
+});
 
-})
 
 
