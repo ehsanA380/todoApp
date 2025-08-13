@@ -27,6 +27,7 @@ export default defineConfig({
     fs: {
       allow: ['.'],
     },
+    host:'0.0.0.0',
     port:process.env.PORT ? parseInt(process.env.PORT) : 5173,
     // ✅ No need for historyApiFallback here
   },
