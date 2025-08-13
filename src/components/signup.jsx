@@ -22,7 +22,8 @@ function signup() {
         setSpinner(true)
         e.preventDefault();
         console.log(formData); // { name: '...', email: '...' }
-        const response = await fetch('http://localhost:3000/signup', {
+        // const response = await fetch('http://localhost:3000/signup', {
+        const response = await fetch('https://todoapp-backend-gub9.onrender.com/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

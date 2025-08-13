@@ -10,7 +10,8 @@ const AuthProvider =({children})=>{
         const token = sessionStorage.getItem('token');
         const verifyToken = async (token)=>{
              // optionally verify token with backend
-            const res = await fetch('http://localhost:3000/verifyjwt',{
+            const res = await fetch('https://todoapp-backend-gub9.onrender.com/verifyjwt',{
+            // const res = await fetch('http://localhost:3000/verifyjwt',{
                 method:'POST',
                 headers: {
                     'Authorization': token,
