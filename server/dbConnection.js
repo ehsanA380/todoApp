@@ -10,7 +10,7 @@ const DB_NAME = 'todoAppDB';
 let db;
 
 function dbConnection(){
-    // mongodb connetion===========
+    // mongodb connetion==========
 
     MongoClient.connect(DB_URI)
     .then(client=>{
