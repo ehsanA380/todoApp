@@ -5,12 +5,14 @@ const AuthProvider =({children})=>{
     const [auth,setAuth] = useState({token:null,user:null,data:{}});
     const [login,setLogin]= useState(false);
     const [loading,setLoading] =useState(true);
+    const API_URL='https://todoapp-backend-gub9.onrender.com/verifyjwt';
+    const Local_API='http://localhost:3000/verifyjwt';
     
     useEffect(()=>{
         const token = sessionStorage.getItem('token');
         const verifyToken = async (token)=>{
              // optionally verify token with backend
-            const res = await fetch('https://todoapp-backend-gub9.onrender.com/verifyjwt',{
+            const res = await fetch(API_URL,{
             // const res = await fetch('http://localhost:3000/verifyjwt',{
                 method:'POST',
                 headers: {
@@ -21,10 +23,14 @@ const AuthProvider =({children})=>{
             const data = await res.json();
             console.log(data);
             if(data.status){
+                sessionStorage.setItem('userId',data.data._id)
                 setLogin(true);
                 setLoading(false);
                 const user = data.data.fname;
                 setAuth({token,user,data});   
+            }else{
+                setLogin(false)
+                setLoading(false)
             }
         }
         if(token){

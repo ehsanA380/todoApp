@@ -36,6 +36,18 @@ const createToken = (userId)=>{
     console.log('token err',err)
   }
 }
+
+const verifiytoken = (req,res,next)=>{
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+  if(!token) return res.status(401).json({message:'access token missing'});
+  jwt.verify(token,process.env.JWT_SECRET,(err,user)=>{
+    if (err) return res.status(403).json({ message: 'Invalid or expired token' });
+    req.user = user; // Attach decoded user info to request
+    next();
+
+  })
+}
 //=========================
 
 // app.post('/signup',(req,res)=>{
@@ -131,6 +143,34 @@ app.post('/verifyjwt', async(req,res)=>{
     }
   }catch(err){
     res.status(403).json({message:'invalid token',status:false})
+  }
+})
+
+//add task to db
+app.post('/addTask/:_id',verifiytoken,async(req,res)=>{
+  const taskDetail = req.body;
+  const userId=req.params._id;
+  taskDetail.taskOwner = new ObjectId(userId);
+  console.log('data',taskDetail)
+  try{
+    const result = await db.collection('tasks').insertOne(taskDetail);
+    res.status(201).json({ message:'Task has been inserted into db successfylly.', result});
+  }catch(err){
+    res.status(500).json({message:'faild to insert',err:err});
+  }
+})
+
+//get task form db
+app.get('/tasks/:_id',verifiytoken,async(req,res)=>{
+  const userId = req.params._id;
+  try{
+    const result = await db.collection('tasks').find({taskOwner: new ObjectId(userId)}).toArray();
+    console.log(result)
+    if(!result) return res.status(204).json({message:'no task added please Add Task !',result:[]})
+      res.status(201).json({message:'got data',result});
+  }catch(err){
+    console.log(err);
+    res.status(500).json({message:'internal server error',err})
   }
 })
 

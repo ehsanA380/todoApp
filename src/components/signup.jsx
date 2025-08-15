@@ -8,6 +8,8 @@ function signup() {
     const navigateTo = useNavigate();
     const [spinner, setSpinner] = useState(false);
     const [formData, setFromData] = useState({ fname: '', lname: '', email: '', password: '' });
+    const API_URL='https://todoapp-backend-gub9.onrender.com/signup';
+    const Local_API='http://localhost:3000/signup';
     const handleChange = (e) => {
         console.log(e.target.name, e.target.value);
         const { name, value } = e.target;
@@ -23,7 +25,7 @@ function signup() {
         e.preventDefault();
         console.log(formData); // { name: '...', email: '...' }
         // const response = await fetch('http://localhost:3000/signup', {
-        const response = await fetch('https://todoapp-backend-gub9.onrender.com/signup', {
+        const response = await fetch(API_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

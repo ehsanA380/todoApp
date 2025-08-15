@@ -9,6 +9,8 @@ function Login() {
     const [loggedIn,setLoggedIn] = useState(false);
     const [spinner, setSpinner] = useState(false);
     const [formData, setFromData] = useState({ email: '', password: '' });
+    const API_URL='https://todoapp-backend-gub9.onrender.com/login';
+    const Local_API='http://localhost:3000/login';
     const handleChange = (e) => {
         console.log(e.target.name, e.target.value);
         const { name, value } = e.target;
@@ -23,7 +25,7 @@ function Login() {
         setSpinner(true)
         e.preventDefault();
         console.log(formData); // { name: '...', email: '...' }
-        const response = await fetch('https://todoapp-backend-gub9.onrender.com/login', {
+        const response = await fetch(API_URL, {
         // const response = await fetch('http://localhost:3000/login', {
             method: 'POST',
             headers: {

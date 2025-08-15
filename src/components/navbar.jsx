@@ -25,21 +25,19 @@ function Navbar(){
   <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
     <div class="relative flex h-16 items-center justify-between">
       
-      <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-        <div class="flex shrink-0 items-center">
-          <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company" class="h-8 w-auto" />
-        </div>
-        <div class="hidden sm:ml-6 sm:block">
+      <div class="flex flex-1 items-center justify-between sm:items-stretch sm:justify-start">
+        
+        <div class=" sm:ml-6 sm:block">
           <div class="flex space-x-4">
             {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
             <Link to="/"  class={`rounded-md ${location.pathname=='/'? 'bg-gray-900':''} px-3 py-2 text-sm font-medium text-white`}>TodoApp</Link>
             <Link to="/task" className={`rounded-md ${location.pathname=='/task'? 'bg-gray-900':''} px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white`}>Tasks</Link>
-            <a href="#" className={`rounded-md ${location.pathname=='/project'? 'bg-gray-900':''} px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white`}>Projects</a>
-            <a href="#" className={`rounded-md ${location.pathname=='/calender'? 'bg-gray-900':''} px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white`}>Calendar</a>
+            <a href="#" className={`rounded-md hidden sm:block ${location.pathname=='/project'? 'bg-gray-900':''} px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white`}>Projects</a>
+            <a href="#" className={`rounded-md hidden sm:block ${location.pathname=='/calender'? 'bg-gray-900':''} px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white`}>Calendar</a>
           </div>
         </div>
       </div>
-      <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+      <div class="absolute space-x-2 inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
         <button type="button" class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
           <span class="absolute -inset-1.5"></span>
           <span class="sr-only">View notifications</span>
@@ -50,7 +48,7 @@ function Navbar(){
         {sessionStorage.getItem('login')=='true'?
         <>
         <Link onClick={logoutHandler} id="logout" to="/" type="button" className="btn text-red-500 rounded-md px-3 py-2 text-sm font-medium  hover:bg-gray-700 hover:text-white">Logout</Link>
-        <h1 className="text-green-400 ml-5">{sessionStorage.getItem('fname')}</h1>
+        <h1 className="text-green-400 ">{sessionStorage.getItem('fname')}</h1>
         </>:<>
         <Link id="login" to="/login" type="button" className="btn  rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">LogIn</Link>
         <Link id="signup" to="/signup" type="button" className="btn  rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">SignUp</Link>
