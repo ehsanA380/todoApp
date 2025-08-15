@@ -95,7 +95,7 @@ function Task() {
 
     return (
         <>
-            <div className='bg-[#F1F1F2] absolute bottom-0 h-fit top-16 right-0 left-0  '>
+            <div className='bg-[#F1F1F2] absolute bottom-0 h-fit min-h-screen top-16 right-0 left-0  '>
                 <div className='heading w-full '>
                     <div id='navRow' className={`w-fit  pt-[8px] mx-auto   `}>
                         <button id='today' onClick={() => SetTaskDisplay('today')} className={`btnCustom transition duration-200  border-r-2 rounded-l-xl border-amber-50 px-10 py-2 cursor-pointer bg-green-800  text-white hover:bg-green-700 `}>Today</button>

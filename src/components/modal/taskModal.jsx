@@ -14,7 +14,7 @@ function TaskModal({setFetching}) {
   const handleSubmit = async() =>{
     setFetching(true)
     console.log(formData)
-    const API_URL =`http://localhost:3000/addtask/${sessionStorage.getItem('userId')}`
+    const API_URL =`https://todoapp-backend-gub9.onrender.com/addtask/${sessionStorage.getItem('userId')}`
     try{
       const response = await fetch(API_URL,{
         method: 'POST',
