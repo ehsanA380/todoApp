@@ -108,8 +108,8 @@ function Task() {
                         <h1 >Task</h1>
                     </div>
                     <div className="task mr-20">
-                        <TaskModal setFetching={setFetching} />
-                        <button className='bg-green-700 text-white text-[16px]  py-1 px-5 rounded-[3px] hover:bg-green-600 cursor-pointer' onClick={() => document.getElementById('taskModal').show()} >+ Add Task </button>
+                        <TaskModal setFetching={setFetching} heading={'Task Details'} />
+                        <button id='addTask' className='bg-green-700 text-white text-[16px]  py-1 px-5 rounded-[3px] hover:bg-green-600 cursor-pointer' onClick={() => document.getElementById('taskModal').show()} >+ Add Task </button>
                     </div>
                 </div>
                 <div id="taskHolderContainer " className='h-fit'>
@@ -151,8 +151,6 @@ function Task() {
                             ) : (taskDisplay=='overdue'&&
                                 <h1 className="text-center text-gray-500">No tasks found</h1>
                             )}
-
-
 
                         </div>
 
