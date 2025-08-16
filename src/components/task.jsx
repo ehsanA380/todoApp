@@ -98,29 +98,29 @@ function Task() {
             <div className='bg-[#F1F1F2] absolute bottom-0 h-fit min-h-screen top-16 right-0 left-0  '>
                 <div className='heading w-full '>
                     <div id='navRow' className={`w-fit  pt-[8px] mx-auto   `}>
-                        <button id='today' onClick={() => SetTaskDisplay('today')} className={`btnCustom transition duration-200  border-r-2 rounded-l-xl border-amber-50 px-10 py-2 cursor-pointer bg-green-800  text-white hover:bg-green-700 `}>Today</button>
-                        <button id='pending' onClick={() => SetTaskDisplay('pending')} className={`btnCustom transition duration-200 border-r-2 border-amber-50 px-11 py-2 cursor-pointer bg-[rgb(199,211,194)] hover:bg-green-100`}>Pending</button>
-                        <button id='overdue' onClick={() => SetTaskDisplay('overdue')} className={`btnCustom transition duration-200 rounded-r-xl px-10 py-2 cursor-pointer bg-[rgb(199,211,194)] hover:bg-green-100`}>Overdue</button>
+                        <button id='today' onClick={() => SetTaskDisplay('today')} className={`btnCustom transition duration-100  border-r-2 rounded-l-xl border-amber-50 px-9 sm:px-10  py-2 cursor-pointer bg-green-800  text-white hover:bg-green-700 `}>Today</button>
+                        <button id='pending' onClick={() => SetTaskDisplay('pending')} className={`btnCustom transition duration-100 text-black border-r-2 border-amber-50 px-8 sm:px-9 md:px-10 py-2 cursor-pointer bg-[rgb(199,211,194)] hover:bg-green-100`}>Pending</button>
+                        <button id='overdue' onClick={() => SetTaskDisplay('overdue')} className={`btnCustom transition duration-100 text-black rounded-r-xl px-8 sm:px-9 md:px-10 py-2 cursor-pointer bg-[rgb(199,211,194)] hover:bg-green-100`}>Overdue</button>
                     </div>
                 </div>
                 <div id='taskContainer' className='mt-20 text-2xl w-full flex justify-between items-center'>
-                    <div className="ml-20 text-black font-semibold ">
+                    <div className="sm:ml-20 ml-4  text-black font-semibold ">
                         <h1 >Task</h1>
                     </div>
-                    <div className="task mr-20">
+                    <div className="task sm:mr-20 mr-4">
                         <TaskModal setFetching={setFetching} heading={'Task Details'} />
                         <button id='addTask' className='bg-green-700 text-white text-[16px]  py-1 px-5 rounded-[3px] hover:bg-green-600 cursor-pointer' onClick={() => document.getElementById('taskModal').show()} >+ Add Task </button>
                     </div>
                 </div>
                 <div id="taskHolderContainer " className='h-fit'>
                     <div id="mainTaskWrapper" className='relative mb-5 text-black border-2 border-[#9d9d9dc0] w-[80%] mx-auto min-h-80 rounded-[8px] mt-2  bg-[#fff] shadow-[10px]'>
-                        <div className='absolute flex right-0 gap-1 space-x-2  mr-10 mt-2.5'>
+                        <div className='absolute flex right-0 gap-1 space-x-2 sm:mr-10 mr-2 mt-2.5  '>
                             <p className='mr-5'>Priority:</p>
                             <span className='bg-[#FA8072] px-3 rounded '>High</span>
                             <span className='bg-[#FFFFE0] rounded'>Medium</span>
                             <span className='bg-[#90EE90] px-4 rounded'>Low</span>
                         </div>
-                        <div id="taskList" className='  border-2 border-[#9d9d9dc0]  mx-auto min-h-60 rounded-[1px] mb-10 mt-10 w-[95%] bg-[#fff] shadow-[10px] py-10'>
+                        <div id="taskList" className='  border-2 border-[#9d9d9dc0]  mx-auto min-h-90 sm:min-h-120 rounded-[1px] mb-10 mt-10 w-[95%] bg-[#fff] shadow-[10px] py-10'>
                             {/* <TaskCard/> */}
                             {/* {tasks?
                             (<h1>{tasks[0].title}</h1>):
