@@ -1,8 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect, forwardRef } from 'react'
 import { Link,useNavigate } from 'react-router-dom';
 
-function TaskModal({setFetching}) {
-  const [formData, setFormData] = useState({title:'',priority:'',deadline:'',comment:''});
+const EditTaskModal = forwardRef(({tasks},ref)=> {
+//   const [formData, setFormData] = useState({title:'',priority:'',deadline:'',comment:''});
+//   const [formData, setFormData] = useState({
+//   title: tasks?.title || '',
+//   priority: tasks?.priority || '',
+//   deadline: tasks?.deadline || '',
+//   comment: tasks?.comment || '',
+//   _id: tasks?._id || ''
+// });
   const navigate = useNavigate();
   const handleChange = (e) => {
     const {name,value} = e.target;
@@ -37,13 +44,39 @@ function TaskModal({setFetching}) {
   }
   //handleClose
   const handleClose = ()=>{
-    setFormData({title:'',priority:'',deadline:'',comment:''})
+    setFormData({title:'',priority:'',deadline:'',comment:'',_id:''})
     document.getElementById('taskModal').close();
   }
+  //testing===============================================
+  const [formData, setFormData] = useState({
+    title: '',
+    priority: '',
+    deadline: '',
+    comment: '',
+    _id: ''
+  });
+
+  useEffect(() => {
+    if (tasks) {
+      setFormData({
+        title: tasks.title || '',
+        priority: tasks.priority || '',
+        deadline: tasks.deadline || '',
+        comment: tasks.comment || '',
+        _id: tasks._id || ''
+      });
+    }
+  }, [tasks]);
+
+
+
+  console.log('fromdata',formData.title)
+ 
+  
   return (
     <>
       {/* <button className="btn" onClick={()=>document.getElementById('taskModal').showModal()}>open modal</button> */}
-      <dialog id="taskModal" className="modal">
+      <dialog id="taskModal" className="modal" ref={ref}>
         <div className="modal-box">
           <form method="dialog" onSubmit={handleSubmit}>
             {/* if there is a button in form, it will close the modal */}
@@ -83,12 +116,13 @@ function TaskModal({setFetching}) {
               <button type='submit' className='btn ml-2 bg-green-500 hover:bg-green-400'>update task</button>
             </div>
 
+
           </div>
           </form>
         </div>
       </dialog>
     </>
   )
-}
+})
 
-export default TaskModal
+export default EditTaskModal
